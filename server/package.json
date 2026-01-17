@@ -1,9 +1,9 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "study ai help students to boost knowledge",
+  "description": "StudyDesk AI help students to boost knowledge",
   "keywords": [
-    "studyAi"
+    "StudyDesk"
   ],
   "license": "ISC",
   "author": "Aditya Namdev",

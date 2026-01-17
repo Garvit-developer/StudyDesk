@@ -2381,7 +2381,7 @@ class BossAgent {
         If the question doesn't clearly fit any category, respond with "unknown".
   SPECIAL RULE:
 - If the user asks "who developed you" or similar (who made you, who is your developer, etc.),
-  then do not classify into any subject. Instead, directly answer: "I am developed by SkillEdu team."
+  then do not classify into any subject. Instead, directly answer: "I am developed by StudyDesk team."
 `;
 
     try {
