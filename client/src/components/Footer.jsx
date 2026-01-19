@@ -13,7 +13,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           {/* Column 1: Branding & Description */}
           <div className="md:col-span-4 space-y-6">
-            <img src="/assets/Logo1.png" alt="Study Desk Logo" className="h-16 brightness-0 invert" />
+            <div className="flex items-center gap-3">
+              <img src="/assets/Logo1.png" alt="Study Desk Logo" className="h-14 brightness-0 invert" />
+              <span className="text-2xl font-bold text-white tracking-wide">Study Desk</span>
+            </div>
             <p className="text-gray-400 leading-relaxed text-lg max-w-sm">
               Study Desk is your ultimate learning companion, providing AI-powered assistance and resources to master any subject. Join thousands of students nationwide.
             </p>
@@ -86,16 +89,19 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/5 px-6 md:px-12 py-3 bg-[#0a0724]">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm font-medium text-gray-500">
-          <p>© 2026 Study Desk. All rights reserved.</p>
-          <div className="flex gap-8">
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="text-blue-500 hover:text-blue-400 transition-colors flex items-center gap-1"
-            >
-              Back to Top ↑
-            </button>
+      <div className="relative border-t border-white/5 bg-[#0a0724]">
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
+        <div className="px-6 md:px-12 py-6">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm font-medium text-gray-500">
+            <p>© 2026 Study Desk. All rights reserved.</p>
+            <div className="flex gap-8">
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                className="text-blue-500 hover:text-blue-400 transition-colors flex items-center gap-1"
+              >
+                Back to Top ↑
+              </button>
+            </div>
           </div>
         </div>
       </div>

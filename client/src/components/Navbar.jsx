@@ -42,14 +42,18 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 w-full z-[100] transition-all duration-300">
       {/* Main Navbar with Glassmorphism */}
-      <div className="flex justify-between items-center px-6 md:px-12 py-3 bg-white/80 backdrop-blur-lg shadow-sm border-b border-white/20">
+      <div className="flex justify-between items-center px-6 md:px-12 py-3 bg-white/70 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-b border-white/40 supports-[backdrop-filter]:bg-white/60">
         <div className="hidden md:flex items-center gap-12">
-          <img
-            src="/assets/Logo1.png"
-            alt="Study Desk Logo"
-            className="h-10 hover:scale-105 transition-transform cursor-pointer"
-            onClick={() => navigate("/")}
-          />
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate("/")}>
+            <img
+              src="/assets/Logo1.png"
+              alt="Study Desk Logo"
+              className="h-10 hover:scale-105 transition-transform"
+            />
+            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              Study Desk
+            </span>
+          </div>
           <div className="flex gap-8 text-sm font-semibold tracking-wide text-gray-800 uppercase">
             <NavLink
               to="/dashboard"
@@ -104,11 +108,14 @@ export default function Navbar() {
 
         {/* Hamburger for sm screens */}
         <div className="md:hidden flex items-center justify-between w-full">
-          <img
-            src="/study_desk_logo.png"
-            alt="Study Desk Logo"
-            className="h-9"
-          />
+          <div className="flex items-center gap-2">
+            <img
+              src="/study_desk_logo.png"
+              alt="Study Desk Logo"
+              className="h-9"
+            />
+            <span className="text-lg font-bold text-gray-800">Study Desk</span>
+          </div>
           <button
             onClick={() => setIsOpen(true)}
             className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
@@ -124,11 +131,14 @@ export default function Navbar() {
           } transition-transform duration-300`}
       >
         <div className="flex justify-between items-center px-4 py-4 border-b">
-          <img
-            src="/study_desk_logo.png"
-            alt="Study Desk Logo"
-            className="h-10"
-          />
+          <div className="flex items-center gap-2">
+            <img
+              src="/study_desk_logo.png"
+              alt="Study Desk Logo"
+              className="h-10"
+            />
+            <span className="text-lg font-bold text-gray-800">Study Desk</span>
+          </div>
           <FaTimes
             size={22}
             className="cursor-pointer"
