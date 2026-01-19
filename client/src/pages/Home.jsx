@@ -5,14 +5,12 @@ import HelpSection from '../components/HelpSection'
 import HomeworkForm from '../components/HomeworkForm'
 import NoCheating from '../components/NoCheating'
 import StepByStepSection from '../components/StepByStepSection'
-import TopCategoryCarousel from '../components/TopCategoryCarousel'
 const Home = () => {
   return (
     <>
       <HeroSection />
       <HomeworkForm />
       <NoCheating />
-      <TopCategoryCarousel />
       <StepByStepSection />
       <HelpSection />
       <TestimonialsSection />

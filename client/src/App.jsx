@@ -15,6 +15,9 @@ import ProtectedRoutes from "./routes/ProtectedRoutes";
 import ForgotPassword from "./pages/ForgotPassword";
 import EmailVerfication from "./pages/EmailVerfication";
 import ResetPassword from "./pages/ResetPassword";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const App = () => {
   return (
@@ -27,6 +30,9 @@ const App = () => {
         <Routes>
           <Route element={<MainLayout />}>
             <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="privacy" element={<PrivacyPolicy />} />
             <Route path="/dashboard" element={<Dashboardlayout />}>
               <Route index element={<Navigate to="question" replace />} />
               <Route path="question" element={<Question />} />

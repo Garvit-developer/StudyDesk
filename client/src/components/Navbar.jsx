@@ -45,7 +45,7 @@ export default function Navbar() {
       <div className="flex justify-between items-center px-6 md:px-12 py-3 bg-white/80 backdrop-blur-lg shadow-sm border-b border-white/20">
         <div className="hidden md:flex items-center gap-12">
           <img
-            src="/study_desk_logo.png"
+            src="/assets/Logo1.png"
             alt="Study Desk Logo"
             className="h-10 hover:scale-105 transition-transform cursor-pointer"
             onClick={() => navigate("/")}
@@ -58,12 +58,6 @@ export default function Navbar() {
               }
             >
               Dashboard
-            </NavLink>
-            <NavLink
-              to="#"
-              className="relative py-1 transition-colors hover:text-blue-600 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all hover:after:w-full"
-            >
-              Resources
             </NavLink>
           </div>
         </div>
