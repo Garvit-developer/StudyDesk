@@ -42,15 +42,15 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 w-full z-[100] transition-all duration-300">
       {/* Main Navbar with Glassmorphism */}
-      <div className="flex justify-between items-center px-6 md:px-12 py-3 bg-white/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] border-b border-white/40 supports-[backdrop-filter]:bg-white/70">
+      <div className="flex justify-between items-center px-6 md:px-12 py-3 bg-white/70 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-b border-white/40 supports-[backdrop-filter]:bg-white/60">
         <div className="hidden md:flex items-center gap-12">
-          <div className="flex items-center gap-3 cursor-pointer group" onClick={() => navigate("/")}>
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate("/")}>
             <img
               src="/assets/Logo1.png"
               alt="Study Desk Logo"
-              className="h-10 group-hover:scale-110 transition-transform duration-300"
+              className="h-10 hover:scale-105 transition-transform"
             />
-            <span className="text-2xl font-black bg-gradient-to-r from-brand-blue to-indigo-600 bg-clip-text text-transparent tracking-tight">
+            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
               Study Desk
             </span>
           </div>

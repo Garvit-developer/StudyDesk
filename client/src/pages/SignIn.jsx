@@ -73,87 +73,77 @@ const SignIn = () => {
   };
 
   return (
-    <div className="p-10 md:p-12 h-fit bg-white rounded-[2.5rem] shadow-2xl shadow-brand-blue/5 border border-gray-100">
+    <div className="p-8 h-fit bg-gray-100 rounded-lg shadow border border-gray-200">
       <Toaster position="top-center" reverseOrder={false} />
 
-      <h2 className="text-4xl font-black text-gray-900 mb-4 tracking-tighter">
+      <h2 className="text-3xl font-semibold text-gray-900 mb-2">
         Welcome back!
       </h2>
-      <p className="text-gray-500 mb-8 font-medium text-lg tracking-tight leading-relaxed">
-        Ready to continue your learning journey? <br />
-        Enter your details below to get back in action.
+      <p className="text-gray-500 mb-6 text-sm">
+        Hey there! Ready to log in? Just enter your username and password below
+        and you'll be back in action in no time.
       </p>
 
-      <div className="flex items-center my-8">
-        <hr className="flex-grow border-gray-100" />
+      <div className="flex items-center my-4">
+        <hr className="flex-grow border-gray-300" />
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="space-y-2">
-          <label className="text-xs font-black text-gray-400 uppercase tracking-widest ml-1" htmlFor="email">
-            Email Address
+      <form onSubmit={handleSubmit} className="space-y-4 text-sm">
+        <div>
+          <label className="block mb-2 text-gray-700" htmlFor="email">
+            Email
           </label>
           <input
             id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="your@email.com"
-            className="w-full bg-gray-50/50 border border-gray-100 rounded-xl px-5 py-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue/10 focus:border-brand-blue transition-all"
+            placeholder="Email"
+            className="w-full border border-gray-300 rounded p-3 bg-white outline-none"
           />
           {errors.email && (
-            <p className="text-red-500 mt-1 text-xs font-bold font-mono uppercase tracking-tight ml-1">{errors.email}</p>
+            <p className="text-red-500 mt-1 text-[10px]">{errors.email}</p>
           )}
         </div>
 
-        <div className="space-y-2 relative">
-          <label className="text-xs font-black text-gray-400 uppercase tracking-widest ml-1" htmlFor="password">
+        <div className="relative">
+          <label className="block mb-2 text-gray-700" htmlFor="password">
             Password
           </label>
-          <div className="relative">
-            <input
-              id="password"
-              name="password"
-              type={showPassword ? "text" : "password"}
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="••••••••"
-              className="w-full bg-gray-50/50 border border-gray-100 rounded-xl px-5 py-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue/10 focus:border-brand-blue transition-all pr-12"
-            />
-            <div
-              className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-brand-blue transition-colors"
-              onClick={() => setShowPassword((prev) => !prev)}
-            >
-              {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
-            </div>
+          <input
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Password"
+            className="w-full border border-gray-300 rounded p-3 bg-white pr-10 outline-none"
+          />
+          <div
+            className="absolute right-3 top-10 cursor-pointer text-gray-500"
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
           </div>
           {errors.password && (
-            <p className="text-red-500 mt-1 text-xs font-bold font-mono uppercase tracking-tight ml-1">{errors.password}</p>
+            <p className="text-red-500 mt-1 text-[10px]">{errors.password}</p>
           )}
         </div>
 
-        <div className="flex justify-end">
-          <Link
-            to="/forgot-password"
-            className="text-brand-blue font-bold hover:text-brand-blue-dark transition-colors text-sm"
-          >
-            Forgot Password?
-          </Link>
-        </div>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-black py-5 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-1 active:scale-95 disabled:opacity-50"
+        <Link
+          to="/forgot-password"
+          className="text-blue-600 hover:underline text-sm mb-4 block text-end"
         >
-          {loading ? "Signing In..." : "Sign In →"}
-        </button>
+          Forgot Password?
+        </Link>
+
+        <Button type="submit" title="Sign In →" loading={loading} />
       </form>
 
-      <p className="mt-8 text-center text-gray-500 font-medium">
+      <p className="mt-4 text-sm text-center text-gray-600">
         Don't have an account?{" "}
-        <Link to="/sign-up" className="text-brand-blue font-black hover:underline ml-1">
-          Create Account
+        <Link to="/sign-up" className="text-blue-600 hover:underline">
+          Sign Up
         </Link>
       </p>
     </div>

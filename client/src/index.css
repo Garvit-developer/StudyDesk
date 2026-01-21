@@ -1,18 +1,5 @@
 @import "tailwindcss";
 
-@theme {
-  --color-brand-blue: #155dfc;
-  --color-brand-blue-dark: #0052cc;
-  --color-brand-yellow: #ffc224;
-  --color-surface-soft: #f9fafb;
-}
-
-@layer base {
-  body {
-    @apply transition-all duration-300 ease-in-out;
-  }
-}
-
 .poppins-regular {
   font-family: "Poppins", sans-serif;
   font-weight: 400;

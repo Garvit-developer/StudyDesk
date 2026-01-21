@@ -96,114 +96,99 @@ const SignUp = () => {
   };
 
   return (
-    <div className="p-10 md:p-12 h-fit bg-white rounded-[2.5rem] shadow-2xl shadow-brand-blue/5 border border-gray-100">
+    <div className="p-8 pb-5 h-fit bg-gray-100 rounded-lg shadow border border-gray-200">
       <Toaster position="top-center" reverseOrder={false} />
-      <h2 className="text-4xl font-black text-gray-900 mb-4 tracking-tighter">
+      <h2 className="text-3xl font-semibold text-gray-900 mb-2">
         Create Your Account
       </h2>
-      <p className="text-gray-500 mb-8 font-medium text-lg tracking-tight leading-relaxed">
-        Ready to join the party? <br />
-        We just need a few details to get you started.
+      <p className="text-gray-500 mb-6 text-sm">
+        Hey there! Ready to join the party? We just need a few details from you
+        to get started. Let’s do this!
       </p>
 
-      <div className="flex items-center my-8">
-        <hr className="flex-grow border-gray-100" />
+      <div className="flex items-center my-4">
+        <hr className="flex-grow border-gray-300" />
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <label className="text-xs font-black text-gray-400 uppercase tracking-widest ml-1">First Name</label>
+      <form onSubmit={handleSubmit} className="space-y-4 text-sm">
+        <div className="flex gap-4">
+          <div className="w-1/2">
             <input
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
               type="text"
               placeholder="First Name"
-              className="w-full bg-gray-50/50 border border-gray-100 rounded-xl px-5 py-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue/10 focus:border-brand-blue transition-all"
+              className="w-full border border-gray-300 rounded p-3 bg-white"
             />
-            {errors.firstName && <p className="text-red-500 mt-1 text-xs font-bold font-mono uppercase tracking-tight ml-1">{errors.firstName}</p>}
+            {errors.firstName && <p className="text-red-500 mt-1 text-[10px]">{errors.firstName}</p>}
           </div>
-          <div className="space-y-2">
-            <label className="text-xs font-black text-gray-400 uppercase tracking-widest ml-1">Last Name</label>
+          <div className="w-1/2">
             <input
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
               type="text"
               placeholder="Last Name"
-              className="w-full bg-gray-50/50 border border-gray-100 rounded-xl px-5 py-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue/10 focus:border-brand-blue transition-all"
+              className="w-full border border-gray-300 rounded p-3 bg-white"
             />
-            {errors.lastName && <p className="text-red-500 mt-1 text-xs font-bold font-mono uppercase tracking-tight ml-1">{errors.lastName}</p>}
+            {errors.lastName && <p className="text-red-500 mt-1 text-[10px]">{errors.lastName}</p>}
           </div>
         </div>
 
-        <div className="space-y-2">
-          <label className="text-xs font-black text-gray-400 uppercase tracking-widest ml-1">Email Address</label>
+        <div>
           <input
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="your@email.com"
-            className="w-full bg-gray-50/50 border border-gray-100 rounded-xl px-5 py-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue/10 focus:border-brand-blue transition-all"
+            placeholder="Email"
+            className="w-full border border-gray-300 rounded p-3 bg-white"
           />
-          {errors.email && <p className="text-red-500 mt-1 text-xs font-bold font-mono uppercase tracking-tight ml-1">{errors.email}</p>}
+          {errors.email && <p className="text-red-500 mt-1 text-[10px]">{errors.email}</p>}
         </div>
 
-        <div className="space-y-2 relative">
-          <label className="text-xs font-black text-gray-400 uppercase tracking-widest ml-1">Password</label>
-          <div className="relative">
-            <input
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              type={showPassword ? "text" : "password"}
-              placeholder="••••••••"
-              className="w-full bg-gray-50/50 border border-gray-100 rounded-xl px-5 py-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue/10 focus:border-brand-blue transition-all pr-12"
-            />
-            <div
-              className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-brand-blue transition-colors"
-              onClick={() => setShowPassword((prev) => !prev)}
-            >
-              {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
-            </div>
+        <div className="relative">
+          <input
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            className="w-full border border-gray-300 rounded p-3 bg-white pr-10"
+          />
+          <div
+            className="absolute right-3 top-3.5 text-gray-500 cursor-pointer"
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
           </div>
-          {errors.password && <p className="text-red-500 mt-1 text-xs font-bold font-mono uppercase tracking-tight ml-1">{errors.password}</p>}
+          {errors.password && <p className="text-red-500 mt-1 text-[10px]">{errors.password}</p>}
         </div>
 
-        <div className="space-y-2 relative">
-          <label className="text-xs font-black text-gray-400 uppercase tracking-widest ml-1">Confirm Password</label>
-          <div className="relative">
-            <input
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="••••••••"
-              className="w-full bg-gray-50/50 border border-gray-100 rounded-xl px-5 py-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue/10 focus:border-brand-blue transition-all pr-12"
-            />
-            <div
-              className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-brand-blue transition-colors"
-              onClick={() => setShowConfirmPassword((prev) => !prev)}
-            >
-              {showConfirmPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
-            </div>
+        <div className="relative">
+          <input
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            type={showConfirmPassword ? "text" : "password"}
+            placeholder="Confirm Password"
+            className="w-full border border-gray-300 rounded p-3 bg-white pr-10"
+          />
+          <div
+            className="absolute right-3 top-3.5 text-gray-500 cursor-pointer"
+            onClick={() => setShowConfirmPassword((prev) => !prev)}
+          >
+            {showConfirmPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
           </div>
-          {errors.confirmPassword && <p className="text-red-500 mt-1 text-xs font-bold font-mono uppercase tracking-tight ml-1">{errors.confirmPassword}</p>}
+          {errors.confirmPassword && <p className="text-red-500 mt-1 text-[10px]">{errors.confirmPassword}</p>}
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-black py-5 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-1 active:scale-95 disabled:opacity-50"
-        >
-          {loading ? "Creating Account..." : "Sign Up →"}
-        </button>
+        <Button type="submit" title="Sign Up →" loading={loading} />
       </form>
 
-      <p className="mt-8 text-center text-gray-500 font-medium">
+      <p className="mt-4 text-sm text-center text-gray-600">
         Already have an account?{" "}
-        <Link to="/login" className="text-brand-blue font-black hover:underline ml-1">
+        <Link to="/login" className="text-blue-600 hover:underline">
           Login
         </Link>
       </p>
