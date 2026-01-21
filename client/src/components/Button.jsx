@@ -13,12 +13,12 @@ const Button = ({
       type={type}
       onClick={onClickfunc}
       disabled={loading}
-      className={`bg-[#ffc224] font-semibold border-[1.5px] rounded-full py-2 
-        hover:bg-[#5751e1] hover:border-[#5751e1] hover:text-white 
-        custom-boxShadow  transition-all duration-1000 ease-in-out ${customStyle}
-      ${icon ? "flex items-center justify-center" : ""}  ${
-        loading ? "opacity-50 cursor-not-allowed" : ""
-      } `}
+      className={`bg-brand-yellow font-bold border-[1.5px] border-black/5 rounded-full py-2.5 px-6 
+        hover:bg-brand-blue hover:border-brand-blue hover:text-white 
+        hover:shadow-lg hover:-translate-y-0.5 active:scale-95
+        transition-all duration-300 ease-in-out ${customStyle}
+      ${icon ? "flex items-center justify-center" : ""}  ${loading ? "opacity-50 cursor-not-allowed" : ""
+        } `}
     >
       {loading ? (
         <span className="flex items-center justify-center gap-2">

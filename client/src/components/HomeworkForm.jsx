@@ -80,47 +80,67 @@ export default function HomeworkForm() {
   };
 
   return (
-    <div className="max-w-5xl md:mx-auto mb-10 p-6 bg-gray-100 mx-5 rounded-xl shadow-md border border-gray-300 ">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+    <div className="max-w-5xl md:mx-auto mb-16 p-8 bg-white mx-5 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
+      <form onSubmit={handleSubmit} className="space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
           <div>
-            <label className="font-semibold mb-2 flex items-center gap-2">
-              <FaBook /> Subject
+            <label className="font-bold text-gray-700 mb-2 flex items-center gap-2">
+              <FaBook className="text-brand-blue" /> Subject
             </label>
             <Select
               options={subjectOptions}
-               isSearchable={true}
+              isSearchable={true}
               value={subject}
               onChange={setSubject}
               className="text-black"
+              styles={{
+                control: (base) => ({
+                  ...base,
+                  borderRadius: '12px',
+                  padding: '2px',
+                  borderColor: '#e5e7eb',
+                  boxShadow: 'none',
+                  '&:hover': { borderColor: '#155dfc' }
+                })
+              }}
             />
           </div>
 
           <div>
-            <label className="font-semibold mb-2 flex items-center gap-2">
-              <FaGraduationCap /> Level
+            <label className="font-bold text-gray-700 mb-2 flex items-center gap-2">
+              <FaGraduationCap className="text-brand-blue" /> Level
             </label>
             <Select
               options={levelOptions}
               value={level}
-               isSearchable={false}
+              isSearchable={false}
               onChange={setLevel}
               className="text-black"
+              styles={{
+                control: (base) => ({
+                  ...base,
+                  borderRadius: '12px',
+                  padding: '2px',
+                  borderColor: '#e5e7eb',
+                  boxShadow: 'none',
+                  '&:hover': { borderColor: '#155dfc' }
+                })
+              }}
             />
           </div>
         </div>
 
         <div className="relative">
-          <div className="hidden absolute right-0 -top-6 md:flex  items-center justify-center pointer-events-none">
+          <div className="hidden absolute right-4 -top-8 md:flex items-center justify-center pointer-events-none">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 99.3 57"
-              width="48"
-              className="mt-5"
+              width="40"
+              className="mt-5 opacity-40"
             >
               <path
                 fill="none"
-                stroke="blue"
+                stroke="var(--color-brand-blue)"
                 strokeWidth="4"
                 strokeLinecap="round"
                 strokeMiterlimit="10"
@@ -128,24 +148,24 @@ export default function HomeworkForm() {
               ></path>
               <path
                 fill="none"
-                stroke="blue"
+                stroke="var(--color-brand-blue)"
                 strokeWidth="4"
                 strokeLinecap="round"
                 strokeMiterlimit="10"
                 d="M11,54.3c0,0,10.3-65.2,86.3-50"
               ></path>
             </svg>
-            <span className="text-[8px] bg-green-800 px-2 py-1 text-white font-bold rounded-lg animate-zoom-in-out">
+            <span className="text-[10px] bg-brand-blue/10 px-3 py-1.5 text-brand-blue font-black rounded-full animate-zoom-in-out ml-2">
               Type your question here!
             </span>
           </div>
-          <label className="font-semibold  mb-2 flex items-center gap-2">
-            <FaCommentDots />
+          <label className="font-bold text-gray-700 mb-2 flex items-center gap-2">
+            <FaCommentDots className="text-brand-blue" />
             Your homework question <span className="text-red-500">*</span>
           </label>
           <textarea
             rows={4}
-            className="w-full border rounded-md px-4 py-3  bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 border-gray-300"
+            className="w-full border rounded-xl px-5 py-4 bg-gray-50/50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all border-gray-100"
             placeholder="Enter your homework question here..."
             value={question}
             onChange={(e) => setQuestion(e.target.value)}

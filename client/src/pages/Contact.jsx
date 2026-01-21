@@ -29,45 +29,45 @@ const Contact = () => {
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="space-y-8"
+                    className="space-y-10"
                 >
-                    <div>
-                        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-6">
+                    <div className="space-y-6">
+                        <h1 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-brand-blue to-indigo-600 bg-clip-text text-transparent tracking-tighter leading-tight">
                             Get in Touch
                         </h1>
-                        <p className="text-gray-600 text-lg">
-                            Have questions, feedback, or want to collaborate? We'd love to hear from you.
+                        <p className="text-gray-500 text-xl font-medium tracking-tight">
+                            Have questions, feedback, or want to collaborate? <br /> We'd love to hear from you.
                         </p>
                     </div>
 
                     <div className="space-y-6">
-                        <div className="flex items-center gap-4 text-gray-700">
-                            <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
-                                <FaEnvelope size={20} />
+                        <div className="flex items-center gap-6 group">
+                            <div className="w-14 h-14 bg-brand-blue/10 rounded-2xl flex items-center justify-center text-brand-blue group-hover:scale-110 transition-transform duration-300">
+                                <FaEnvelope size={24} />
                             </div>
                             <div>
-                                <p className="text-sm text-gray-500 uppercase">Email</p>
-                                <a href="mailto:garvitdani@gmail.com" className="hover:text-blue-600 transition-colors">garvitdani@gmail.com</a>
+                                <p className="text-xs font-black text-brand-blue uppercase tracking-widest mb-1">Email</p>
+                                <a href="mailto:garvitdani@gmail.com" className="text-lg font-bold text-gray-900 hover:text-brand-blue transition-colors">garvitdani@gmail.com</a>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-4 text-gray-700">
-                            <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
-                                <FaPhone size={20} />
+                        <div className="flex items-center gap-6 group">
+                            <div className="w-14 h-14 bg-brand-blue/10 rounded-2xl flex items-center justify-center text-brand-blue group-hover:scale-110 transition-transform duration-300">
+                                <FaPhone size={24} />
                             </div>
                             <div>
-                                <p className="text-sm text-gray-500 uppercase">Phone</p>
-                                <p>+91 123 456 7890</p>
+                                <p className="text-xs font-black text-brand-blue uppercase tracking-widest mb-1">Phone</p>
+                                <p className="text-lg font-bold text-gray-900">+91 123 456 7890</p>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-4 text-gray-700">
-                            <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
-                                <FaMapMarkerAlt size={20} />
+                        <div className="flex items-center gap-6 group">
+                            <div className="w-14 h-14 bg-brand-blue/10 rounded-2xl flex items-center justify-center text-brand-blue group-hover:scale-110 transition-transform duration-300">
+                                <FaMapMarkerAlt size={24} />
                             </div>
                             <div>
-                                <p className="text-sm text-gray-500 uppercase">Location</p>
-                                <p>India</p>
+                                <p className="text-xs font-black text-brand-blue uppercase tracking-widest mb-1">Location</p>
+                                <p className="text-lg font-bold text-gray-900">India</p>
                             </div>
                         </div>
                     </div>
@@ -77,55 +77,57 @@ const Contact = () => {
                 <motion.div
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="bg-white border border-gray-100 rounded-2xl p-8 shadow-xl shadow-blue-500/5"
+                    className="bg-white border border-gray-100 rounded-[2rem] p-8 md:p-12 shadow-2xl shadow-brand-blue/5"
                 >
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-600 mb-2">Name</label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                                className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-blue-500 transition-colors"
-                                placeholder="Your Name"
-                            />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-2">
+                                <label htmlFor="name" className="text-xs font-black text-gray-400 uppercase tracking-widest ml-1">Name</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full bg-gray-50/50 border border-gray-100 rounded-xl px-5 py-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue/10 focus:border-brand-blue transition-all"
+                                    placeholder="Your Name"
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label htmlFor="email" className="text-xs font-black text-gray-400 uppercase tracking-widest ml-1">Email</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full bg-gray-50/50 border border-gray-100 rounded-xl px-5 py-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue/10 focus:border-brand-blue transition-all"
+                                    placeholder="your@email.com"
+                                />
+                            </div>
                         </div>
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-600 mb-2">Email</label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                                className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-blue-500 transition-colors"
-                                placeholder="your@email.com"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="message" className="block text-sm font-medium text-gray-600 mb-2">Message</label>
+                        <div className="space-y-2">
+                            <label htmlFor="message" className="text-xs font-black text-gray-400 uppercase tracking-widest ml-1">Message</label>
                             <textarea
                                 id="message"
                                 name="message"
                                 value={formData.message}
                                 onChange={handleChange}
                                 required
-                                rows="4"
-                                className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-blue-500 transition-colors resize-none"
+                                rows="5"
+                                className="w-full bg-gray-50/50 border border-gray-100 rounded-xl px-5 py-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue/10 focus:border-brand-blue transition-all resize-none"
                                 placeholder="How can we help?"
                             ></textarea>
                         </div>
 
                         <button
                             type="submit"
-                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-blue-500/30"
+                            className="w-full bg-brand-blue hover:bg-brand-blue-dark text-white font-black py-5 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-1 active:scale-95"
                         >
                             <span>Send Message</span>
-                            <FaPaperPlane size={16} />
+                            <FaPaperPlane size={18} className="rotate-12" />
                         </button>
                     </form>
                 </motion.div>

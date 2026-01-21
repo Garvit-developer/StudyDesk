@@ -3,32 +3,39 @@ import { Typewriter } from "react-simple-typewriter";
 
 const NoCheating = () => {
   return (
-    <div className="mx-8 my-5 mb-20">
-      <div className="flex md:flex-row flex-col w-full justify-between items-center bg-gray-100 p-4 rounded-xl">
-        <img src="h7_cta_img.png" alt="image" className="md:h-28 mb-5 md:mb-0 md:px-10" />
+    <div className="mx-8 my-10 mb-20 animate-fadeIn">
+      <div className="flex md:flex-row flex-col w-full justify-between items-center bg-gradient-to-br from-brand-blue/5 to-transparent p-6 md:p-10 rounded-3xl border border-brand-blue/10 shadow-sm">
+        <img
+          src="h7_cta_img.png"
+          alt="Learning Smarter"
+          className="md:h-32 mb-6 md:mb-0 md:px-10 drop-shadow-xl hover:scale-105 transition-transform duration-500"
+        />
 
-        <div className="md:w-[28rem] w-72">
-          <h4 className="md:text-3xl text-2xl font-semibold text-gray-800 mb-2 md:mb-0">
+        <div className="md:w-[32rem] w-full text-center md:text-left">
+          <h4 className="md:text-4xl text-2xl font-black text-gray-900 mb-3 tracking-tight">
             It's not cheating...
           </h4>
-          <p className="md:text-lg text-gray-600 mb-2 md:mb-0 h-12 md:h-fit">
+          <p className="md:text-xl text-gray-600 font-medium h-12 md:h-fit tracking-tight">
             <Typewriter
-                      words={[
-                        "You're just learning smarter than everyone else"
-                      ]}
-                      loop={0}
-                      cursor
-                      cursorStyle="|"
-                      typeSpeed={80}
-                      deleteSpeed={50}
-                      delaySpeed={1500}
-                    />
+              words={[
+                "You're just learning smarter than everyone else."
+              ]}
+              loop={1}
+              cursor
+              cursorStyle="_"
+              typeSpeed={60}
+              deleteSpeed={50}
+              delaySpeed={1500}
+            />
           </p>
         </div>
 
-        <button className="bg-[#0052cc] hover:bg-[#0041a8] text-white font-semibold px-6 py-2 rounded-full m-2 shadow-md relative custom-boxShadow mr-4">
-          Try now →
-          <span className="absolute -bottom-1 -right-1 bg-[#001b66] w-full h-full rounded-full -z-10 translate-x-1 translate-y-1"></span>
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="bg-brand-blue hover:bg-brand-blue-dark text-white font-bold px-10 py-4 rounded-full shadow-xl shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-1 active:scale-95 transition-all duration-300 group"
+        >
+          Try now
+          <span className="inline-block transition-transform group-hover:translate-x-1 ml-2">→</span>
         </button>
       </div>
     </div>

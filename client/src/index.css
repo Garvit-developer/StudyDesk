@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-blue: #155dfc;
+  --color-brand-blue-dark: #0052cc;
+  --color-brand-yellow: #ffc224;
+  --color-surface-soft: #f9fafb;
+}
+
+@layer base {
+  body {
+    @apply transition-all duration-300 ease-in-out;
+  }
+}
+
 .poppins-regular {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
@@ -47,9 +60,12 @@
 
 
 @keyframes zoomInOut {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
@@ -59,18 +75,21 @@
   animation: zoomInOut 3s ease-in-out infinite;
 }
 
-.active{
-  color:  #155dfc;
+.active {
+  color: #155dfc;
   font-weight: 600;
 }
 
 
 @keyframes upDown {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
-    transform: translateY(-10px); 
+    transform: translateY(-10px);
   }
 }
 
@@ -90,6 +109,7 @@
       opacity: 0;
       transform: scale(0.95);
     }
+
     to {
       opacity: 1;
       transform: scale(1);
@@ -100,10 +120,13 @@
 
 /* Hide scrollbar but allow scrolling */
 .hide-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
+  /* Chrome, Safari, Opera */
 }
