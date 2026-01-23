@@ -18,6 +18,8 @@ import ResetPassword from "./pages/ResetPassword";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import PomodoroTimer from "./components/PomodoroTimer";
+import Flashcards from "./pages/Flashcards";
 
 const App = () => {
   return (
@@ -27,6 +29,7 @@ const App = () => {
         <CustomCursor />
       </div>
       <BrowserRouter>
+        <PomodoroTimer />
         <Routes>
           <Route element={<MainLayout />}>
             <Route index element={<Home />} />
@@ -40,6 +43,7 @@ const App = () => {
               <Route element={<ProtectedRoutes />}>
                 <Route path="history" element={<History />} />
                 <Route path="settings" element={<Settings />} />
+                <Route path="flashcards" element={<Flashcards />} />
               </Route>
             </Route>
           </Route>

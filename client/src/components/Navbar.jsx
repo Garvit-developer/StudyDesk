@@ -63,6 +63,14 @@ export default function Navbar() {
             >
               Dashboard
             </NavLink>
+            <NavLink
+              to="/dashboard/flashcards"
+              className={({ isActive }) =>
+                `relative py-1 transition-colors hover:text-blue-600 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all hover:after:w-full ${isActive ? 'text-blue-600 after:w-full' : ''}`
+              }
+            >
+              Flashcards
+            </NavLink>
           </div>
         </div>
 
@@ -150,6 +158,7 @@ export default function Navbar() {
           {[
             { name: "Home", path: "/" },
             { name: "Dashboard", path: "/dashboard" },
+            { name: "Flashcards", path: "/dashboard/flashcards" },
             { name: "Resources", path: "#" }
           ].map((link, idx) => (
             <NavLink

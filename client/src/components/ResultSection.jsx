@@ -10,6 +10,9 @@ import rehypeRaw from "rehype-raw";
 import formatResponse from "../utils/formattedAnswer";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 //Reusable Markdown block
 const CopyableMarkdownBlock = ({ label, icon, value, placeholder }) => {
@@ -159,8 +162,34 @@ const Modal = ({ isOpen, onClose, children }) => {
 };
 
 const ResultSection = ({ aiResult, loading }) => {
-  const { answer, explanation, steps, success } = aiResult;
+  const { answer, explanation, steps, success, subject: aiSubject } = aiResult;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+
+  const handleSaveFlashcard = async () => {
+    if (!answer) return;
+    setIsSaving(true);
+    try {
+      await axios.post("/api/flashcards", {
+        question: aiResult.question || "Study Question", // We should pass original question ideally
+        answer: answer,
+        subject: aiSubject || "General"
+      }, { withCredentials: true });
+      setIsSaved(true);
+      toast.success("Saved to Flashcards!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to save flashcard");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  // Reset saved status when result changes
+  useEffect(() => {
+    setIsSaved(false);
+  }, [answer]);
 
   return (
     <div className="relative bg-white p-6 rounded-lg shadow border w-full md:w-1/2">
@@ -168,7 +197,7 @@ const ResultSection = ({ aiResult, loading }) => {
       {loading && (
         <div className="absolute inset-0 bg-white/60 backdrop-blur-[1px] flex items-center justify-center rounded-lg z-10">
           <div className="text-lg font-semibold animate-pulse text-gray-700 flex items-center gap-2">
-            <FaSpinner className="animate-spin"/> Loading AI Response...
+            <FaSpinner className="animate-spin" /> Loading AI Response...
           </div>
         </div>
       )}
@@ -176,18 +205,33 @@ const ResultSection = ({ aiResult, loading }) => {
       {/* Header */}
       <div className="flex items-center justify-between mb-4 border-b pb-2">
         <h2 className="text-xl font-bold text-gray-800">Result</h2>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="px-3 py-1  transition cursor-pointer relative group"
-        >
-          <FaRegEye size={25} />
-          <div className="absolute top-[-25px] mb-3 left-1/2 -translate-x-1/2 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
-            <div className="relative bg-black text-white text-xs px-3 py-1 rounded-md shadow-lg whitespace-nowrap">
-              view Response
-              <div className="absolute top-[80%] left-1/2 -translate-x-1/2 w-2 h-2 bg-black rotate-45"></div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handleSaveFlashcard}
+            disabled={isSaving || isSaved || !answer}
+            className={`p-2 transition cursor-pointer relative group rounded-full ${isSaved ? 'text-red-500 bg-red-50' : 'text-gray-400 hover:text-red-500 hover:bg-red-50'}`}
+          >
+            {isSaving ? <FaSpinner className="animate-spin" size={20} /> : isSaved ? <FaHeart size={20} /> : <FaRegHeart size={20} />}
+            <div className="absolute top-[-30px] left-1/2 -translate-x-1/2 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 z-20">
+              <div className="relative bg-black text-white text-[10px] px-2 py-1 rounded shadow-lg whitespace-nowrap">
+                {isSaved ? 'Saved!' : 'Save as Flashcard'}
+                <div className="absolute top-[80%] left-1/2 -translate-x-1/2 w-2 h-2 bg-black rotate-45"></div>
+              </div>
             </div>
-          </div>
-        </button>
+          </button>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 transition cursor-pointer relative group rounded-full"
+          >
+            <FaRegEye size={22} />
+            <div className="absolute top-[-30px] left-1/2 -translate-x-1/2 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 z-20">
+              <div className="relative bg-black text-white text-[10px] px-2 py-1 rounded shadow-lg whitespace-nowrap">
+                View Full Response
+                <div className="absolute top-[80%] left-1/2 -translate-x-1/2 w-2 h-2 bg-black rotate-45"></div>
+              </div>
+            </div>
+          </button>
+        </div>
       </div>
 
       {/* Error case */}
