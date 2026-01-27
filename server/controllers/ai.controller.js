@@ -2,10 +2,6 @@ const bossAgent = require('../config/aiAgent.js');
 
 const {  getUserAIResponses, deleteUserAIResponse ,deleteAllUserResponses} = require('../models/aiResponses.model.js');
 
-
-
-
-
 //ask-ai
 const askAI = async (req, res) => {
   try {
@@ -51,7 +47,6 @@ const askAI = async (req, res) => {
   }
 }
 
-
 //Get All Responses with Search
 const getSavedResponses = async (req, res) => {
   const userId = req.user.id;
@@ -81,8 +76,6 @@ const getSavedResponses = async (req, res) => {
     res.status(500).json({ message: 'Database error' });
   }
 };
-
-
 
 //Delete singe response
 const deleteResponse = async (req, res) => {

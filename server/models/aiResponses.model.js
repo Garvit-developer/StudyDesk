@@ -78,8 +78,6 @@ if (search) {
   ];
 }
 
-
-
   const countQuery = `
     SELECT COUNT(*) AS total 
     FROM ai_responses 
@@ -114,7 +112,6 @@ if (search) {
     throw new Error("Error fetching AI responses: " + err.message);
   }
 };
-
 
 
 const deleteUserAIResponse = async (userId, responseId) => {

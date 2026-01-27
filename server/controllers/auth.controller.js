@@ -35,7 +35,7 @@ const register = async (req, res) => {
       userId,
       name,
       email,
-      
+
     });
   } catch (err) {
     console.error("[Register Error]", err.message);
@@ -75,7 +75,7 @@ const login = async (req, res) => {
       address: user.address,
       mobile: user.mobile,
       profile_pic: user.profile_pic,
-      created_at : user.created_at,
+      created_at: user.created_at,
       tokenSetInCookie: true,
     });
   } catch (err) {
@@ -87,8 +87,8 @@ const login = async (req, res) => {
 // LOGOUT
 const logout = (req, res) => {
   res.clearCookie("token", {
-     httpOnly: false,
-      secure: false,
+    httpOnly: false,
+    secure: false,
     sameSite: "lax",
   });
   res.status(200).json({ message: "Logged out successfully" });
@@ -127,7 +127,7 @@ const updateProfilePic = async (req, res) => {
     const token = createToken(updatedUser);
 
     res.cookie("token", token, {
-        httpOnly: false,
+      httpOnly: false,
       secure: false,
       sameSite: "lax",
       maxAge: 24 * 60 * 60 * 1000,
@@ -172,7 +172,7 @@ const deleteProfilePic = async (req, res) => {
     const token = createToken(updatedUser);
 
     res.cookie("token", token, {
-       httpOnly: false,
+      httpOnly: false,
       secure: false,
       sameSite: "lax",
       maxAge: 24 * 60 * 60 * 1000,
@@ -225,7 +225,7 @@ const updateProfile = async (req, res) => {
     const token = createToken(updatedUser);
 
     res.cookie("token", token, {
-     httpOnly: false,
+      httpOnly: false,
       secure: false,
       sameSite: "lax",
       maxAge: 24 * 60 * 60 * 1000,
@@ -249,7 +249,7 @@ const getIsMe = async (req, res) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    res.json({ id: decoded.id, name: decoded.name, email: decoded.email, address: decoded.address, mobile: decoded.mobile  , profile_pic: decoded.profile_pic, created_at : decoded.created_at});
+    res.json({ id: decoded.id, name: decoded.name, email: decoded.email, address: decoded.address, mobile: decoded.mobile, profile_pic: decoded.profile_pic, created_at: decoded.created_at });
   } catch (err) {
     return res.status(401).json({ message: "Invalid token" });
   }
@@ -257,7 +257,7 @@ const getIsMe = async (req, res) => {
 
 // delete user permanently
 const deleteUserPermanently = async (req, res) => {
-  const userId = req.user.id; 
+  const userId = req.user.id;
 
   try {
     const sql = "DELETE FROM users WHERE id = ?";
