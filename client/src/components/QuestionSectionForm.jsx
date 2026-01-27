@@ -131,7 +131,7 @@ const QuestionSectionForm = ({ setAiResult, setLoading, loading }) => {
       setSelectedFile(null);
       setPreview(null);
       setOpenAccordion(null);
-      
+
     } catch (err) {
       console.error("API Error:", err.message);
       toast.error(
@@ -211,9 +211,25 @@ const QuestionSectionForm = ({ setAiResult, setLoading, loading }) => {
     }
   };
 
+  const handlePaste = async (e) => {
+    const items = e.clipboardData.items;
+    for (const item of items) {
+      if (item.type.indexOf("image") !== -1) {
+        const file = item.getAsFile();
+        if (file) {
+          setPreview(URL.createObjectURL(file));
+          setSelectedFile(file);
+          // Automatically open the upload accordion if it's not open
+          setOpenAccordion("upload");
+          await extractTextFromImage(file);
+        }
+      }
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Prevent submission if already submitting
     if (isSubmitting) {
       return;
@@ -234,7 +250,7 @@ const QuestionSectionForm = ({ setAiResult, setLoading, loading }) => {
 
     await submitQuestion(data);
   };
-const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   return (
     <form onSubmit={handleSubmit} className="">
       <h2 className="text-2xl font-bold mb-4">Question</h2>
@@ -254,20 +270,20 @@ const [searchQuery, setSearchQuery] = useState("");
 
       {/* Select Fields */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-    <div className="bg-gray-100 p-3 rounded-md">
-  <label className="flex items-center gap-2 text-sm font-semibold text-gray-600 mb-1">
-    <FaBook /> Subject
-  </label>
-  <Select
-    options={subjectOptions}   
-    value={subject}
-    onChange={setSubject}
-    className="text-sm"
-    isSearchable={true}       
-    isDisabled={isSubmitting}
-    placeholder="Select or search a subject..."
-  />
-</div>
+        <div className="bg-gray-100 p-3 rounded-md">
+          <label className="flex items-center gap-2 text-sm font-semibold text-gray-600 mb-1">
+            <FaBook /> Subject
+          </label>
+          <Select
+            options={subjectOptions}
+            value={subject}
+            onChange={setSubject}
+            className="text-sm"
+            isSearchable={true}
+            isDisabled={isSubmitting}
+            placeholder="Select or search a subject..."
+          />
+        </div>
 
         <div className="bg-gray-100 p-3 rounded-md">
           <label className="flex items-center gap-2 text-sm font-semibold text-gray-600 mb-1">
@@ -293,9 +309,10 @@ const [searchQuery, setSearchQuery] = useState("");
           name="question"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
+          onPaste={handlePaste}
           className="w-full p-2 rounded-md border border-gray-300"
           rows="3"
-          placeholder="Enter your question here..."
+          placeholder="Enter your question here (or paste an image)..."
           required
           disabled={isSubmitting}
         />
@@ -305,31 +322,28 @@ const [searchQuery, setSearchQuery] = useState("");
       <div className="flex flex-col gap-3 mb-4">
         {/* Upload Accordion */}
         <div>
-          {/* <button
+          <button
             type="button"
             onClick={() => toggleAccordion("upload")}
-            className={`w-full flex justify-between items-center px-4 py-2 bg-gray-100 text-gray-700 border ${
-              openAccordion === "upload"
+            className={`w-full flex justify-between items-center px-4 py-2 bg-gray-100 text-gray-700 border ${openAccordion === "upload"
                 ? "rounded-t-md border-b-0"
                 : "rounded-md"
-            } transition-all duration-300`}
+              } transition-all duration-300`}
             disabled={isSubmitting}
           >
             <span className="flex items-center gap-2">
               <FaImage /> Upload File or Image
             </span>
             <FaPlus
-              className={`transition-transform duration-300 ${
-                openAccordion === "upload" ? "rotate-45" : ""
-              }`}
+              className={`transition-transform duration-300 ${openAccordion === "upload" ? "rotate-45" : ""
+                }`}
             />
-          </button> */}
+          </button>
           <div
-            className={`overflow-hidden transition-all duration-500 ease-in-out bg-white px-4 border border-t-0 border-gray-300 text-sm text-gray-700 ${
-              openAccordion === "upload"
+            className={`overflow-hidden transition-all duration-500 ease-in-out bg-white px-4 border border-t-0 border-gray-300 text-sm text-gray-700 ${openAccordion === "upload"
                 ? "max-h-60 py-3 rounded-b-md"
                 : "max-h-0 py-0"
-            }`}
+              }`}
           >
             <div className="flex flex-col gap-2">
               <input
@@ -367,28 +381,25 @@ const [searchQuery, setSearchQuery] = useState("");
           <button
             type="button"
             onClick={() => toggleAccordion("advanced")}
-            className={`w-full flex justify-between items-center px-4 py-2 bg-gray-100 text-gray-700 border ${
-              openAccordion === "advanced"
+            className={`w-full flex justify-between items-center px-4 py-2 bg-gray-100 text-gray-700 border ${openAccordion === "advanced"
                 ? "rounded-t-md border-b-0"
                 : "rounded-md"
-            } transition-all duration-300`}
+              } transition-all duration-300`}
             disabled={isSubmitting}
           >
             <span className="flex items-center gap-2">
               <FaSlidersH /> Advanced Options
             </span>
             <FaPlus
-              className={`transition-transform duration-300 ${
-                openAccordion === "advanced" ? "rotate-45" : ""
-              }`}
+              className={`transition-transform duration-300 ${openAccordion === "advanced" ? "rotate-45" : ""
+                }`}
             />
           </button>
           <div
-            className={`overflow-hidden transition-all duration-500 ease-in-out bg-white px-4 border border-t-0 border-gray-300 text-sm text-gray-700 ${
-              openAccordion === "advanced"
+            className={`overflow-hidden transition-all duration-500 ease-in-out bg-white px-4 border border-t-0 border-gray-300 text-sm text-gray-700 ${openAccordion === "advanced"
                 ? "max-h-40 py-3 rounded-b-md"
                 : "max-h-0 py-0"
-            }`}
+              }`}
           >
             <div className="flex flex-col gap-2">
               <label className="flex items-center gap-2">
