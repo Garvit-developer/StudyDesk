@@ -11,6 +11,8 @@ import Dashboardlayout from "./layouts/Dashboardlayout";
 import Question from "./pages/Question";
 import Settings from "./pages/Settings";
 import History from "./pages/History";
+import Dashboard from "./pages/Dashboard";
+import Quiz from "./pages/Quiz";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import ForgotPassword from "./pages/ForgotPassword";
 import EmailVerfication from "./pages/EmailVerfication";
@@ -37,13 +39,14 @@ const App = () => {
             <Route path="contact" element={<Contact />} />
             <Route path="privacy" element={<PrivacyPolicy />} />
             <Route path="/dashboard" element={<Dashboardlayout />}>
-              <Route index element={<Navigate to="question" replace />} />
+              <Route index element={<Dashboard />} />
               <Route path="question" element={<Question />} />
 
               <Route element={<ProtectedRoutes />}>
                 <Route path="history" element={<History />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="flashcards" element={<Flashcards />} />
+                <Route path="quiz" element={<Quiz />} />
               </Route>
             </Route>
           </Route>

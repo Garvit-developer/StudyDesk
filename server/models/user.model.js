@@ -62,39 +62,39 @@ const updateUserProfile = async (userId, fields) => {
 };
 
 const updateOTP = async (id, otp, expiry) => {
-    try {
-      await db.query(
-        "UPDATE users SET otp = ? , expires_at = ? WHERE id = ?",
-        [otp, expiry, id]
-      );
-    } catch (err) {
-      throw err;
-    }  
+  try {
+    await db.query(
+      "UPDATE users SET otp = ? , expires_at = ? WHERE id = ?",
+      [otp, expiry, id]
+    );
+  } catch (err) {
+    throw err;
   }
+}
 
 
-  const clearOTP = async (id) => {
-    try {
-      await db.query(
-        "UPDATE users SET otp = NULL, expires_at = NULL WHERE id = ?",
-        [id]
-      );
-    } catch (err) {
-      throw err;
-    }
+const clearOTP = async (id) => {
+  try {
+    await db.query(
+      "UPDATE users SET otp = NULL, expires_at = NULL WHERE id = ?",
+      [id]
+    );
+  } catch (err) {
+    throw err;
   }
+}
 
 // Update password
-  const updatePassword = async (id, hashedPassword) => {
-    try {
-      await db.query(
-        "UPDATE users SET password = ? WHERE id = ?",
-        [hashedPassword, id]
-      );
-    } catch (err) {
-      throw err;
-    }
+const updatePassword = async (id, hashedPassword) => {
+  try {
+    await db.query(
+      "UPDATE users SET password = ? WHERE id = ?",
+      [hashedPassword, id]
+    );
+  } catch (err) {
+    throw err;
   }
+}
 
 module.exports = {
   initUserTable,

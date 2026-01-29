@@ -7,6 +7,8 @@ const { initUserTable } = require("./models/user.model.js");
 const { aiResponseTable } = require("./models/aiResponses.model.js");
 const aiRoutes = require("./routes/ai.routes.js");
 const flashcardRoutes = require("./routes/flashcard.routes.js");
+const statsRoutes = require("./routes/stats.routes.js");
+const quizRoutes = require("./routes/quiz.routes.js");
 const { initFlashcardTable } = require("./models/flashcard.model.js");
 const path = require("path");
 
@@ -26,6 +28,8 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/auth", authRoutes);
 app.use('/api/', aiRoutes);
 app.use('/api/', flashcardRoutes);
+app.use('/api/', statsRoutes);
+app.use('/api/', quizRoutes);
 
 // Initialize the user table
 initUserTable();

@@ -1,5 +1,4 @@
-import React from "react";
-import { FaUser, FaQuestion, FaClock, FaCog } from "react-icons/fa";
+import { FaUser, FaQuestion, FaClock, FaCog, FaChartBar, FaClone, FaRegCheckSquare } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
@@ -36,7 +35,21 @@ const WelcomeCard = () => {
       </div>
 
       {/* Options Row */}
-      <div className="md:flex block gap-8 text-gray-800 text-lg font-medium px-2">
+      <div className="md:flex flex-wrap block gap-8 text-gray-800 text-lg font-medium px-2">
+        {/* Statistics - Link to /dashboard (index) */}
+        <NavLink
+          to="/dashboard"
+          end
+          onClick={handleProtectedClick}
+          className={({ isActive }) =>
+            `flex items-center border-b border-gray-300 md:border-none md:p-0 p-2 gap-2 cursor-pointer transition ${isActive ? "text-blue-600" : "hover:text-blue-600"
+            }`
+          }
+        >
+          <FaChartBar />
+          <span>Statistics</span>
+        </NavLink>
+
         {/* Always accessible */}
         <NavLink
           to="/dashboard/question"
@@ -47,6 +60,32 @@ const WelcomeCard = () => {
         >
           <FaQuestion />
           <span>Question</span>
+        </NavLink>
+
+        {/* Quiz */}
+        <NavLink
+          to="/dashboard/quiz"
+          onClick={handleProtectedClick}
+          className={({ isActive }) =>
+            `flex items-center border-b border-gray-300 md:border-none md:p-0 p-2 gap-2 cursor-pointer transition ${isActive ? "text-blue-600" : "hover:text-blue-600"
+            }`
+          }
+        >
+          <FaRegCheckSquare />
+          <span>Quiz</span>
+        </NavLink>
+
+        {/* Flashcards */}
+        <NavLink
+          to="/dashboard/flashcards"
+          onClick={handleProtectedClick}
+          className={({ isActive }) =>
+            `flex items-center border-b border-gray-300 md:border-none md:p-0 p-2 gap-2 cursor-pointer transition ${isActive ? "text-blue-600" : "hover:text-blue-600"
+            }`
+          }
+        >
+          <FaClone />
+          <span>Flashcards</span>
         </NavLink>
 
         {/* Protected - History */}
