@@ -4,16 +4,17 @@ const getUserStats = async (req, res) => {
     try {
         const userId = req.user.id;
 
-        const [global, subjects, activity] = await Promise.all([
+        const [global, subjects, activity, streak] = await Promise.all([
             statsModel.getGlobalStats(userId),
             statsModel.getSubjectDistribution(userId),
-            statsModel.getActivityOverTime(userId)
+            statsModel.getActivityOverTime(userId),
+            statsModel.getDailyStreak(userId)
         ]);
 
         res.status(200).json({
             success: true,
             stats: {
-                global,
+                global: { ...global, streak },
                 subjects,
                 activity
             }

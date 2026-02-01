@@ -22,6 +22,8 @@ import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import PomodoroTimer from "./components/PomodoroTimer";
 import Flashcards from "./pages/Flashcards";
+import Roadmaps from "./pages/Roadmaps";
+import Summarizer from "./pages/Summarizer";
 
 const App = () => {
   return (
@@ -47,6 +49,8 @@ const App = () => {
                 <Route path="settings" element={<Settings />} />
                 <Route path="flashcards" element={<Flashcards />} />
                 <Route path="quiz" element={<Quiz />} />
+                <Route path="roadmaps" element={<Roadmaps />} />
+                <Route path="summarizer" element={<Summarizer />} />
               </Route>
             </Route>
           </Route>

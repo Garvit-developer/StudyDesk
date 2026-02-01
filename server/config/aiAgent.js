@@ -2284,11 +2284,62 @@ class CriticalThinkingAgent {
 }
 
 
+// 40. Roadmap Generator
+class RoadmapAgent {
+  constructor() {
+    this.model = createGroqModel(0.7);
+    this.name = "Roadmap Expert";
+  }
+
+  async generateRoadmap(topic, grade) {
+    const prompt = `You are an expert Educational Consultant and Curriculum Designer.
+    Generate a detailed, structured study roadmap for a student at ${grade} level wanting to learn: ${topic}.
+    
+    The roadmap should be divided into logical phases (e.g., Weeks or Modules).
+    Each phase should have:
+    1. A Title
+    2. A brief overview of what will be learned
+    3. 3-5 specific Learning Objectives
+    4. Suggested Resources or Activities
+    
+    IMPORTANT: You MUST return the response in the following JSON format ONLY. Do not include any other text.
+    {
+      "topic": "${topic}",
+      "grade": "${grade}",
+      "phases": [
+        {
+          "phase": 1,
+          "title": "Phase Title",
+          "description": "Short description",
+          "objectives": ["Obj 1", "Obj 2"],
+          "resources": ["Resource 1", "Resource 2"]
+        }
+      ]
+    }`;
+
+    try {
+      const messages = [
+        new SystemMessage("You are a curriculum design expert. Respond only in valid JSON."),
+        new HumanMessage(prompt)
+      ];
+      const response = await this.model.invoke(messages);
+
+      // Clean potential markdown code blocks from response
+      const content = response.content.replace(/```json/g, "").replace(/```/g, "").trim();
+      return JSON.parse(content);
+    } catch (error) {
+      console.error("Roadmap Generation Error:", error);
+      throw new Error("Failed to generate a valid roadmap JSON.");
+    }
+  }
+}
+
 // Boss Agent - Main Controller
 class BossAgent {
   constructor() {
     this.model = createGroqModel(0.3);
     this.agents = {
+      roadmap: new RoadmapAgent(),
       science: new ScienceAgent(),
       history: new HistoryAgent(),
       geography: new GeographyAgent(),
@@ -2519,6 +2570,25 @@ class BossAgent {
         success: false,
         error: `Error processing question: ${error.message}`,
         subject: subject,
+      };
+    }
+  }
+
+  async handleRoadmap(topic, grade, userId) {
+    if (!GRADE_LEVELS.includes(grade)) {
+      throw new Error(`Invalid grade level: ${grade}`);
+    }
+
+    try {
+      const roadmap = await this.agents.roadmap.generateRoadmap(topic, grade);
+      return {
+        success: true,
+        roadmap
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message
       };
     }
   }

@@ -15,7 +15,7 @@ import {
     AreaChart,
     Area
 } from "recharts";
-import { FaQuestionCircle, FaLayerGroup, FaCheckCircle, FaFire } from "react-icons/fa";
+import { FaQuestionCircle, FaLayerGroup, FaCheckCircle, FaFire, FaClock } from "react-icons/fa";
 
 const COLORS = ["#4F46E5", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6", "#EC4899"];
 
@@ -74,6 +74,12 @@ const Dashboard = () => {
             {/* Summary Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <StatCard
+                    title="Focus Time"
+                    value={`${data.global.focusMinutes}m`}
+                    icon={<FaClock size={20} />}
+                    color="bg-indigo-600"
+                />
+                <StatCard
                     title="Questions Asked"
                     value={global.questionsAsked}
                     icon={<FaQuestionCircle size={20} />}
@@ -83,17 +89,11 @@ const Dashboard = () => {
                     title="Flashcards Created"
                     value={global.totalFlashcards}
                     icon={<FaLayerGroup size={20} />}
-                    color="bg-indigo-600"
-                />
-                <StatCard
-                    title="Mastery Rate"
-                    value={`${masteryRate}%`}
-                    icon={<FaCheckCircle size={20} />}
                     color="bg-emerald-600"
                 />
                 <StatCard
                     title="Daily Streak"
-                    value="5 Days"
+                    value={`${global.streak} Days`}
                     icon={<FaFire size={20} />}
                     color="bg-orange-600"
                 />

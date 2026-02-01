@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaPlay, FaPause, FaRedo, FaChevronUp, FaChevronDown, FaClock } from "react-icons/fa";
 import { toast } from "react-hot-toast";
+import axios from "axios";
 
 const PomodoroTimer = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -39,6 +40,16 @@ const PomodoroTimer = () => {
         if (mode === "work") {
             const nextSessionCount = sessionCount + 1;
             setSessionCount(nextSessionCount);
+
+            // Record session to backend
+            try {
+                axios.post("/api/pomodoro/session", {
+                    duration: Math.round(settings.work / 60),
+                    type: "work"
+                }, { withCredentials: true });
+            } catch (err) {
+                console.error("Failed to record session", err);
+            }
 
             if (nextSessionCount % 4 === 0) {
                 setMode("longBreak");

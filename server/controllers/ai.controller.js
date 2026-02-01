@@ -1,6 +1,6 @@
 const bossAgent = require('../config/aiAgent.js');
 
-const {  getUserAIResponses, deleteUserAIResponse ,deleteAllUserResponses} = require('../models/aiResponses.model.js');
+const { getUserAIResponses, deleteUserAIResponse, deleteAllUserResponses } = require('../models/aiResponses.model.js');
 
 //ask-ai
 const askAI = async (req, res) => {
@@ -114,9 +114,46 @@ const deleteAllResponses = async (req, res) => {
   }
 };
 
+const summarizeText = async (req, res) => {
+  try {
+    const { text, length = "medium" } = req.body;
+
+    if (!text || text.trim().length < 50) {
+      return res.status(400).json({
+        success: false,
+        error: "Please provide a longer text (at least 50 characters) to summarize.",
+      });
+    }
+
+    const prompt = `You are an expert summarizer. Summarize the following text into a ${length} length summary. 
+    Focus on key concepts and main ideas suitable for a student.
+    
+    Text: ${text}`;
+
+    const messages = [
+      new SystemMessage("You provide high-quality educational summaries."),
+      new HumanMessage(prompt),
+    ];
+
+    const response = await bossAgent.model.invoke(messages);
+
+    res.json({
+      success: true,
+      summary: response.content,
+    });
+  } catch (error) {
+    console.error("Summarization Error:", error);
+    res.status(500).json({
+      success: false,
+      error: "Failed to generate summary.",
+    });
+  }
+};
+
 module.exports = {
   askAI,
   getSavedResponses,
   deleteResponse,
-  deleteAllResponses
+  deleteAllResponses,
+  summarizeText
 };
