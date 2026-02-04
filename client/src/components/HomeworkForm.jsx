@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
+import { toast } from "react-hot-toast";
 
 
 const subjectOptions = [
@@ -180,8 +181,8 @@ export default function HomeworkForm() {
               type="button"
               onClick={startListening}
               className={`absolute right-3 bottom-3 p-3 rounded-full transition-all ${isListening
-                  ? "bg-red-100 text-red-600 animate-pulse border-red-200"
-                  : "bg-blue-50 text-blue-600 hover:bg-blue-100 border-blue-100"
+                ? "bg-red-100 text-red-600 animate-pulse border-red-200"
+                : "bg-blue-50 text-blue-600 hover:bg-blue-100 border-blue-100"
                 } border`}
             >
               {isListening ? <FaStopCircle size={18} /> : <FaMicrophone size={18} />}

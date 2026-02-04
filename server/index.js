@@ -9,9 +9,11 @@ const aiRoutes = require("./routes/ai.routes.js");
 const flashcardRoutes = require("./routes/flashcard.routes.js");
 const statsRoutes = require("./routes/stats.routes.js");
 const quizRoutes = require("./routes/quiz.routes.js");
+const searchRoutes = require("./routes/search.routes.js");
 const { initFlashcardTable } = require("./models/flashcard.model.js");
 const { roadmapTable } = require("./models/roadmap.model.js");
 const { pomodoroTable } = require("./models/pomodoro.model.js");
+const { initBadgesTable } = require("./models/badges.model.js");
 const path = require("path");
 
 
@@ -32,6 +34,7 @@ app.use('/api/', aiRoutes);
 app.use('/api/', flashcardRoutes);
 app.use('/api/', statsRoutes);
 app.use('/api/', quizRoutes);
+app.use('/api/', searchRoutes);
 
 // Initialize the user table
 initUserTable();
@@ -43,6 +46,8 @@ initFlashcardTable();
 roadmapTable();
 // Initialize the pomodoro table
 pomodoroTable();
+// Initialize the badges table
+initBadgesTable();
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>

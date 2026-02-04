@@ -9,6 +9,9 @@ import {
   FaInstagram,
   FaPhone,
   FaTimes,
+  FaSun,
+  FaMoon,
+  FaSearch,
 } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import Button from "./Button";
@@ -21,6 +24,22 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  React.useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => setDarkMode(!darkMode);
   const isDashboard =
     location.pathname === "/dashboard/question" ||
     location.pathname === "/dashboard/settings" ||
@@ -109,7 +128,22 @@ export default function Navbar() {
           </div>
         ) : (
           <div className="flex items-center gap-6">
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:scale-110 transition-all"
+              title="Search"
+            >
+              <FaSearch size={18} />
+            </button>
+            <button
+              onClick={toggleDarkMode}
+              className="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:scale-110 transition-all"
+              title="Toggle Theme"
+            >
+              {darkMode ? <FaSun size={18} /> : <FaMoon size={18} />}
+            </button>
             {user ? (
+
               <div className="hidden md:flex justify-center items-center gap-4">
                 <span className="text-sm font-medium text-gray-600">Hi, <span className="text-gray-900 font-bold">{user?.name?.split(" ")[0]}</span></span>
                 <button

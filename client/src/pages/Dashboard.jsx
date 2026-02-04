@@ -15,10 +15,16 @@ import {
     AreaChart,
     Area
 } from "recharts";
-import { FaQuestionCircle, FaLayerGroup, FaCheckCircle, FaFire, FaClock, FaChartLine, FaChartPie } from "react-icons/fa";
+import { FaQuestionCircle, FaLayerGroup, FaCheckCircle, FaFire, FaClock, FaChartLine, FaChartPie, FaTrophy, FaMedal } from "react-icons/fa";
 import gsap from "gsap";
 
 const COLORS = ["#5751e1", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6", "#EC4899"];
+
+const BADGE_MAP = {
+    'STREAK_WARRIOR': { name: 'Streak Warrior', icon: <FaFire />, color: 'bg-orange-600', desc: '7 Day Study Streak' },
+    'FLASHCARD_MASTER': { name: 'Flashcard Master', icon: <FaLayerGroup />, color: 'bg-emerald-600', desc: '50+ Flashcards Created' },
+    'FOCUS_GIANT': { name: 'Focus Giant', icon: <FaClock />, color: 'bg-indigo-600', desc: '500+ Focus Minutes' }
+};
 
 const StatCard = ({ title, value, icon, color, index }) => {
     const cardRef = useRef(null);
@@ -90,7 +96,7 @@ const Dashboard = () => {
 
     if (!data) return <div className="text-center py-20 font-black text-gray-400 uppercase tracking-widest">No data available</div>;
 
-    const { global, subjects, activity } = data;
+    const { global, subjects, activity, badges } = data;
 
     return (
         <div className="p-6 md:p-10 max-w-7xl mx-auto space-y-10" ref={containerRef}>
@@ -221,6 +227,45 @@ const Dashboard = () => {
                         )}
                     </div>
                 </div>
+            </div>
+
+            {/* Achievements Section */}
+            <div className="dashboard-section bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm premium-card">
+                <div className="flex items-center justify-between mb-8">
+                    <h3 className="text-xl font-black text-gray-900 tracking-tight flex items-center gap-3">
+                        <div className="bg-orange-50 p-2 rounded-lg text-orange-600">
+                            <FaTrophy size={18} />
+                        </div>
+                        Achievements
+                    </h3>
+                    <span className="text-[10px] font-black text-orange-400 uppercase tracking-widest bg-orange-50 px-3 py-1 rounded-full">{badges?.length || 0} Unlocked</span>
+                </div>
+
+                {badges && badges.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {badges.map((badge, idx) => {
+                            const config = BADGE_MAP[badge.badge_type] || { name: badge.badge_type, icon: <FaMedal />, color: 'bg-gray-600', desc: 'Achievement' };
+                            return (
+                                <div key={idx} className="flex items-center gap-5 p-5 rounded-3xl border border-gray-50 bg-gray-50/50 hover:bg-white hover:shadow-lg transition-all group">
+                                    <div className={`p-4 rounded-2xl ${config.color} text-white shadow-lg group-hover:scale-110 transition-transform`}>
+                                        {config.icon}
+                                    </div>
+                                    <div>
+                                        <h4 className="font-black text-gray-900 leading-tight">{config.name}</h4>
+                                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">{config.desc}</p>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                ) : (
+                    <div className="flex flex-col items-center justify-center py-10 text-gray-400 gap-4">
+                        <div className="bg-gray-50 p-6 rounded-full">
+                            <FaMedal size={32} className="text-gray-200" />
+                        </div>
+                        <span className="font-black text-xs uppercase tracking-widest text-center">No achievements yet.<br /><span className="text-[10px] text-gray-300">Keep studying to unlock badges!</span></span>
+                    </div>
+                )}
             </div>
         </div>
     );
