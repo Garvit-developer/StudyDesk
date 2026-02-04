@@ -5,6 +5,8 @@ import {
   FaGraduationCap,
   FaCommentDots,
   FaRocket,
+  FaMicrophone,
+  FaStopCircle,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
@@ -66,7 +68,29 @@ export default function HomeworkForm() {
   const [subject, setSubject] = useState(subjectOptions[0]);
   const [level, setLevel] = useState(levelOptions[0]);
   const [question, setQuestion] = useState("");
+  const [isListening, setIsListening] = useState(false);
   const navigate = useNavigate();
+
+  const startListening = () => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      toast.error("Speech recognition not supported in this browser.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+
+    recognition.onstart = () => setIsListening(true);
+    recognition.onend = () => setIsListening(false);
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setQuestion((prev) => (prev ? prev + " " + transcript : transcript));
+    };
+
+    recognition.start();
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -143,14 +167,26 @@ export default function HomeworkForm() {
             <FaCommentDots />
             Your homework question <span className="text-red-500">*</span>
           </label>
-          <textarea
-            rows={4}
-            className="w-full border rounded-md px-4 py-3  bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 border-gray-300"
-            placeholder="Enter your homework question here..."
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            required
-          />
+          <div className="relative">
+            <textarea
+              rows={4}
+              className="w-full border rounded-md px-4 py-3 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 border-gray-300 pr-12"
+              placeholder="Enter your homework question here..."
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              required
+            />
+            <button
+              type="button"
+              onClick={startListening}
+              className={`absolute right-3 bottom-3 p-3 rounded-full transition-all ${isListening
+                  ? "bg-red-100 text-red-600 animate-pulse border-red-200"
+                  : "bg-blue-50 text-blue-600 hover:bg-blue-100 border-blue-100"
+                } border`}
+            >
+              {isListening ? <FaStopCircle size={18} /> : <FaMicrophone size={18} />}
+            </button>
+          </div>
         </div>
 
         <div className="text-center">
